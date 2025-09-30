@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <link rel="manifest" href="/manifest.json" />
+<link rel="shortcut icon" href="https://kaloodinaz.github.io/32768/favicon.ico">
+<meta name="theme-color" content="#151515" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>32768 | Play 2048 Variations</title>
+<meta name="description" content="Play 32768, a challenging 2048 variation that pushes your puzzle skills to the limit. Merge tiles, reach the ultimate number, and explore exciting 2048 variations online">
+  <link rel="apple-touch-icon" href="https://kaloodinaz.github.io/2048-reverse/apple-touch-icon.png">
+  <link rel="apple-touch-startup-image" href="https://kaloodinaz.github.io/2048-reverse/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
+  <link rel="apple-touch-startup-image" href="https://kaloodinaz.github.io/2048-reverse/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+<meta property="og:title" content="32768 game"/>
+  <meta property="og:site_name" content="kaloodinaz" />
+  <meta property="og:description" content="Challenge yourself with 32768, the advanced twist on 2048. Merge tiles strategically, aim for the massive 32768 tile, and enjoy endless 2048 game variations right in your browser"/>
+  <meta property="og:image" content="https://kaloodinaz.github.io/32768/og-image.jpg"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+html,body{margin:0;padding:0;background:#faf8ef;color:#776e65;font-family:"Poppins","Helvetica Neue",Arial,sans-serif;font-size:18px}
+body{margin:20px 0}
+.heading:after{content:"";display:block;clear:both}
+h1.title{font-size:40px;font-weight:700;margin:0;display:block;float:left}
+@-webkit-keyframes move-up {
+0%{top:25px;opacity:1}
+100%{top:-50px;opacity:0}
+}
+@-moz-keyframes move-up {
+0%{top:25px;opacity:1}
+100%{top:-50px;opacity:0}
+}
+@keyframes move-up {
+0%{top:25px;opacity:1}
+100%{top:-50px;opacity:0}
+}
+.scores-container{float:right;text-align:right}
+.score-container,.best-container{position:relative;display:inline-block;background:#736960;padding:15px 25px;font-size:25px;height:25px;line-height:47px;font-weight:700;border-radius:3px;color:#fff;margin-top:8px;text-align:center}
+.score-container:after,.best-container:after{position:absolute;width:100%;top:10px;left:0;text-transform:uppercase;font-size:13px;line-height:13px;text-align:center;color:#eee4da}
+.score-container .score-addition,.best-container .score-addition{position:absolute;right:30px;color:red;font-size:25px;line-height:25px;font-weight:700;color:#776e65e6;z-index:100;-webkit-animation:move-up 600ms ease-in;-moz-animation:move-up 600ms ease-in;animation:move-up 600ms ease-in;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;animation-fill-mode:both}
+.score-container:after{content:"Score"}
+.best-container:after{content:"Best"}
+p{margin-top:0;margin-bottom:10px;line-height:1.65}
+a{color:#776e65;font-weight:700;text-decoration:underline;cursor:pointer}
+strong.important{text-transform:uppercase}
+hr{border:none;border-bottom:1px solid #d8d4d0;margin-top:20px;margin-bottom:30px}
+.container{width:500px;margin:0 auto}
+@-webkit-keyframes fade-in {
+0%{opacity:0}
+100%{opacity:1}
+}
+@-moz-keyframes fade-in {
+0%{opacity:0}
+100%{opacity:1}
+}
+@keyframes fade-in {
+0%{opacity:0}
+100%{opacity:1}
+}
+.game-container{margin-top:40px;position:relative;padding:15px;cursor:default;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;background:#736e6b;border-radius:6px;width:500px;height:500px;-ms-touch-action:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.game-container .game-message{display:none;position:absolute;top:0;right:0;bottom:0;left:0;background:#eee4da80;z-index:100;text-align:center;-webkit-animation:fade-in 800ms ease 1200ms;-moz-animation:fade-in 800ms ease 1200ms;animation:fade-in 800ms ease 1200ms;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;animation-fill-mode:both}
+.game-container .game-message p{font-size:60px;font-weight:700;height:60px;line-height:60px;margin-top:222px}
+.game-container .game-message .lower{display:block;margin-top:59px}
+.game-container .game-message a{display:inline-block;background:#8f7a66;border-radius:3px;padding:0 20px;text-decoration:none;color:#f9f6f2;height:40px;line-height:42px;margin-left:9px}
+.game-container .game-message a.keep-playing-button{display:none}
+.game-container .game-message.game-won{background:#edc22e80;color:#f9f6f2}
+.game-container .game-message.game-won a.keep-playing-button{display:inline-block}
+.game-container .game-message.game-won,.game-container .game-message.game-over{display:block}
+.grid-container{position:absolute;z-index:1}
+.grid-row{margin-bottom:15px}
+.grid-row:last-child{margin-bottom:0}
+.grid-row:after{content:"";display:block;clear:both}
+.grid-cell{width:65.83333px;height:65.83333px;margin-right:15px;float:left;border-radius:3px;background:#eee4da59}
+.grid-cell:last-child{margin-right:0}
+.tile-container{position:absolute;z-index:2}
+.tile,.tile .tile-inner{width:66px;height:66px;line-height:75.83333px}
+.tile.tile-position-1-1{-webkit-transform:translate(0px,0px);-moz-transform:translate(0px,0px);transform:translate(0px,0px)}
+.tile.tile-position-1-2{-webkit-transform:translate(0px,80px);-moz-transform:translate(0px,80px);transform:translate(0px,80px)}
+.tile.tile-position-1-3{-webkit-transform:translate(0px,161px);-moz-transform:translate(0px,161px);transform:translate(0px,161px)}
+.tile.tile-position-1-4{-webkit-transform:translate(0px,242px);-moz-transform:translate(0px,242px);transform:translate(0px,242px)}
+.tile.tile-position-1-5{-webkit-transform:translate(0px,323px);-moz-transform:translate(0px,323px);transform:translate(0px,323px)}
+.tile.tile-position-1-6{-webkit-transform:translate(0px,404px);-moz-transform:translate(0px,404px);transform:translate(0px,404px)}
+.tile.tile-position-2-1{-webkit-transform:translate(80px,0px);-moz-transform:translate(80px,0px);transform:translate(80px,0px)}
+.tile.tile-position-2-2{-webkit-transform:translate(80px,80px);-moz-transform:translate(80px,80px);transform:translate(80px,80px)}
+.tile.tile-position-2-3{-webkit-transform:translate(80px,161px);-moz-transform:translate(80px,161px);transform:translate(80px,161px)}
+.tile.tile-position-2-4{-webkit-transform:translate(80px,242px);-moz-transform:translate(80px,242px);transform:translate(80px,242px)}
+.tile.tile-position-2-5{-webkit-transform:translate(80px,323px);-moz-transform:translate(80px,323px);transform:translate(80px,323px)}
+.tile.tile-position-2-6{-webkit-transform:translate(80px,404px);-moz-transform:translate(80px,404px);transform:translate(80px,404px)}
+.tile.tile-position-3-1{-webkit-transform:translate(161px,0px);-moz-transform:translate(161px,0px);transform:translate(161px,0px)}
+.tile.tile-position-3-2{-webkit-transform:translate(161px,80px);-moz-transform:translate(161px,80px);transform:translate(161px,80px)}
+.tile.tile-position-3-3{-webkit-transform:translate(161px,161px);-moz-transform:translate(161px,161px);transform:translate(161px,161px)}
+.tile.tile-position-3-4{-webkit-transform:translate(161px,242px);-moz-transform:translate(161px,242px);transform:translate(161px,242px)}
+.tile.tile-position-3-5{-webkit-transform:translate(161px,323px);-moz-transform:translate(161px,323px);transform:translate(161px,323px)}
+.tile.tile-position-3-6{-webkit-transform:translate(161px,404px);-moz-transform:translate(161px,404px);transform:translate(161px,404px)}
+.tile.tile-position-4-1{-webkit-transform:translate(242px,0px);-moz-transform:translate(242px,0px);transform:translate(242px,0px)}
+.tile.tile-position-4-2{-webkit-transform:translate(242px,80px);-moz-transform:translate(242px,80px);transform:translate(242px,80px)}
+.tile.tile-position-4-3{-webkit-transform:translate(242px,161px);-moz-transform:translate(242px,161px);transform:translate(242px,161px)}
+.tile.tile-position-4-4{-webkit-transform:translate(242px,242px);-moz-transform:translate(242px,242px);transform:translate(242px,242px)}
+.tile.tile-position-4-5{-webkit-transform:translate(242px,323px);-moz-transform:translate(242px,323px);transform:translate(242px,323px)}
+.tile.tile-position-4-6{-webkit-transform:translate(242px,404px);-moz-transform:translate(242px,404px);transform:translate(242px,404px)}
+.tile.tile-position-5-1{-webkit-transform:translate(323px,0px);-moz-transform:translate(323px,0px);transform:translate(323px,0px)}
+.tile.tile-position-5-2{-webkit-transform:translate(323px,80px);-moz-transform:translate(323px,80px);transform:translate(323px,80px)}
+.tile.tile-position-5-3{-webkit-transform:translate(323px,161px);-moz-transform:translate(323px,161px);transform:translate(323px,161px)}
+.tile.tile-position-5-4{-webkit-transform:translate(323px,242px);-moz-transform:translate(323px,242px);transform:translate(323px,242px)}
+.tile.tile-position-5-5{-webkit-transform:translate(323px,323px);-moz-transform:translate(323px,323px);transform:translate(323px,323px)}
+.tile.tile-position-5-6{-webkit-transform:translate(323px,404px);-moz-transform:translate(323px,404px);transform:translate(323px,404px)}
+.tile.tile-position-6-1{-webkit-transform:translate(404px,0px);-moz-transform:translate(404px,0px);transform:translate(404px,0px)}
+.tile.tile-position-6-2{-webkit-transform:translate(404px,80px);-moz-transform:translate(404px,80px);transform:translate(404px,80px)}
+.tile.tile-position-6-3{-webkit-transform:translate(404px,161px);-moz-transform:translate(404px,161px);transform:translate(404px,161px)}
+.tile.tile-position-6-4{-webkit-transform:translate(404px,242px);-moz-transform:translate(404px,242px);transform:translate(404px,242px)}
+.tile.tile-position-6-5{-webkit-transform:translate(404px,323px);-moz-transform:translate(404px,323px);transform:translate(404px,323px)}
+.tile.tile-position-6-6{-webkit-transform:translate(404px,404px);-moz-transform:translate(404px,404px);transform:translate(404px,404px)}
+.tile{position:absolute;-webkit-transition:100ms ease-in-out;-moz-transition:100ms ease-in-out;transition:100ms ease-in-out;-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;transition-property:transform}
+.tile .tile-inner{border-radius:3px;background:#eee4da;text-align:center;font-weight:700;z-index:10;font-size:40px}
+.tile.tile-2 .tile-inner{background:#f9f6f2;box-shadow:0 0 30px 10px #f3d77400 inset 0 0 0 1px #fff0}
+.tile.tile-4 .tile-inner{background:#ECEAC4;box-shadow:0 0 30px 10px #f3d77400 inset 0 0 0 1px #fff0}
+.tile.tile-8 .tile-inner{background:#e3bea1;box-shadow:0 0 30px 10px #f3d77400 inset 0 0 0 1px #fff0}
+.tile.tile-16 .tile-inner{background:#f5b0ad;box-shadow:0 0 30px 10px #f3d77400 inset 0 0 0 1px #fff0}
+.tile.tile-32 .tile-inner{color:#f9f6f2;background:#BD5F3C}
+.tile.tile-64 .tile-inner{color:#f9f6f2;background:#e92929}
+.tile.tile-128 .tile-inner{color:#323130;background:#EAEA85;font-size:35px}
+.tile.tile-256 .tile-inner{color:#e9e8e8;background:#c96a04;font-size:35px}
+.tile.tile-512 .tile-inner{color:#605e5b;background:#FEFE02;font-size:35px}
+.tile.tile-1024 .tile-inner{color:#784c11;background:#E2CA51;font-size:25px}
+.tile.tile-2048 .tile-inner{color:#202020;background:#80E749;font-size:25px}
+.tile.tile-4096 .tile-inner{color:#f9f6f2;background:#32760D;font-size:25px}
+.tile.tile-8192 .tile-inner{color:#f9f6f2;background:#063A06;box-shadow:0 0 30px 10px #f3d7743d inset 0 0 0 1px #ffffff24;font-size:25px}
+@media screen and (max-width: 520px) {
+.tile.tile-128 .tile-inner{font-size:21px}
+}
+.tile.tile-16384 .tile-inner{color:#f9f6f2;background:#14D0DF;box-shadow:0 0 30px 10px #f3d7743d inset 0 0 0 1px #ffffff24;font-size:15px}
+@media screen and (max-width: 520px) {
+.tile.tile--128 .tile-inner{font-size:21px}
+}
+.tile.tile-32768 .tile-inner{color:#f9f6f2;background:#1479DF;box-shadow:0 0 30px 10px #f3d77451 inset 0 0 0 1px #ffffff31;font-size:15px}
+@media screen and (max-width: 520px) {
+.tile.tile-256 .tile-inner{font-size:17px}
+}
+.tile.tile-65536 .tile-inner{color:#f9f6f2;background:#101495;box-shadow:0 0 30px 10px #f3d77451 inset 0 0 0 1px #ffffff31;font-size:15px}
+@media screen and (max-width: 520px) {
+.tile.tile--256 .tile-inner{font-size:21px}
+}
+.tile.tile-131072 .tile-inner{color:#f9f6f2;background:#edc850;box-shadow:0 0 30px 10px #f3d77465 inset 0 0 0 1px #ffffff3d;font-size:45px}
+@media screen and (max-width: 520px) {
+.tile.tile-512 .tile-inner{font-size:21px}
+}
+.tile.tile-262144 .tile-inner{color:#f9f6f2;background:#c7a42d;box-shadow:0 0 30px 10px #f3d77465 inset 0 0 0 1px #ffffff3d;font-size:45px}
+@media screen and (max-width: 520px) {
+.tile.tile--512 .tile-inner{font-size:21px}
+}
+.tile.tile-524288 .tile-inner{color:#f9f6f2;background:#edc53f;box-shadow:0 0 30px 10px #f3d77479 inset 0 0 0 1px #ffffff49;font-size:35px}
+@media screen and (max-width: 520px) {
+.tile.tile-1024 .tile-inner{font-size:15px}
+}
+.tile.tile-1048576 .tile-inner{color:#f9f6f2;background:#dab32d;box-shadow:0 0 30px 10px #f3d77479 inset 0 0 0 1px #ffffff49;font-size:35px}
+@media screen and (max-width: 520px) {
+.tile.tile--1024 .tile-inner{font-size:15px}
+}
+.tile.tile-2097152 .tile-inner{color:#f9f6f2;background:#edc22e;box-shadow:0 0 30px 10px #f3d7748e inset 0 0 0 1px #fff5;font-size:35px}
+@media screen and (max-width: 520px) {
+.tile.tile-2048 .tile-inner{font-size:14px}
+}
+.tile.tile-4194304 .tile-inner{color:#f9f6f2;background:#edc22e;box-shadow:0 0 30px 10px #f3d7748e inset 0 0 0 1px #fff5;font-size:35px}
+@media screen and (max-width: 520px) {
+.tile.tile--2048 .tile-inner{font-size:15px}
+}
+.tile.tile-8388608 .tile-inner{color:#f9f6f2;background:#3c3a32;font-size:30px}
+@media screen and (max-width: 520px) {
+.tile.tile-super .tile-inner{font-size:10px}
+}
+@-webkit-keyframes appear {
+0%{opacity:0;-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+100%{opacity:1;-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+@-moz-keyframes appear {
+0%{opacity:0;-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+100%{opacity:1;-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+@keyframes appear {
+0%{opacity:0;-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+100%{opacity:1;-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+.tile-new .tile-inner{-webkit-animation:appear 200ms ease 100ms;-moz-animation:appear 200ms ease 100ms;animation:appear 200ms ease 100ms;-webkit-animation-fill-mode:backwards;-moz-animation-fill-mode:backwards;animation-fill-mode:backwards}
+@-webkit-keyframes pop {
+0%{-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+50%{-webkit-transform:scale(1.2);-moz-transform:scale(1.2);transform:scale(1.2)}
+100%{-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+@-moz-keyframes pop {
+0%{-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+50%{-webkit-transform:scale(1.2);-moz-transform:scale(1.2);transform:scale(1.2)}
+100%{-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+@keyframes pop {
+0%{-webkit-transform:scale(0);-moz-transform:scale(0);transform:scale(0)}
+50%{-webkit-transform:scale(1.2);-moz-transform:scale(1.2);transform:scale(1.2)}
+100%{-webkit-transform:scale(1);-moz-transform:scale(1);transform:scale(1)}
+}
+.tile-merged .tile-inner{z-index:20;-webkit-animation:pop 200ms ease 100ms;-moz-animation:pop 200ms ease 100ms;animation:pop 200ms ease 100ms;-webkit-animation-fill-mode:backwards;-moz-animation-fill-mode:backwards;animation-fill-mode:backwards}
+.game-intro{margin-bottom:0}
+.game-explanation{margin-top:50px}
+@media screen and (max-width: 520px) {
+html,body{font-size:15px}
+body{margin:10px 0;padding:0 5px}
+h1.title{font-size:27px;margin-top:15px}
+.container{width:280px;margin:0 auto}
+.score-container,.best-container{margin-top:0;padding:15px px;min-width:40px}
+.heading{margin-bottom:10px}
+.game-container{margin-top:40px;position:relative;padding:10px;cursor:default;-webkit-touch-callout:none;-webkit-user-select:none;-moz-user-select:none;background:#615c58;border-radius:6px;width:280px;height:280px;-ms-touch-action:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.game-container .game-message{display:none;position:absolute;top:0;right:0;bottom:0;left:0;background:#eee4da80;z-index:100;text-align:center;-webkit-animation:fade-in 800ms ease 1200ms;-moz-animation:fade-in 800ms ease 1200ms;animation:fade-in 800ms ease 1200ms;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;animation-fill-mode:both}
+.game-container .game-message p{font-size:60px;font-weight:700;height:60px;line-height:60px;margin-top:222px}
+.game-container .game-message .lower{display:block;margin-top:59px}
+.game-container .game-message a{display:inline-block;background:#8f7a66;border-radius:3px;padding:0 20px;text-decoration:none;color:#f9f6f2;height:40px;line-height:42px;margin-left:9px}
+.game-container .game-message a.keep-playing-button{display:none}
+.game-container .game-message.game-won{background:#edc22e80;color:#f9f6f2}
+.game-container .game-message.game-won a.keep-playing-button{display:inline-block}
+.game-container .game-message.game-won,.game-container .game-message.game-over{display:block}
+.grid-container{position:absolute;z-index:1}
+.grid-row{margin-bottom:10px}
+.grid-row:last-child{margin-bottom:0}
+.grid-row:after{content:"";display:block;clear:both}
+.grid-cell{width:35px;height:35px;margin-right:10px;float:left;border-radius:3px;background:#eee4da59}
+.grid-cell:last-child{margin-right:0}
+.tile-container{position:absolute;z-index:2}
+.tile,.tile .tile-inner{width:35px;height:35px;line-height:40px}
+.tile.tile-position-1-1{-webkit-transform:translate(0px,0px);-moz-transform:translate(0px,0px);transform:translate(0px,0px)}
+.tile.tile-position-1-2{-webkit-transform:translate(0px,45px);-moz-transform:translate(0px,45px);transform:translate(0px,45px)}
+.tile.tile-position-1-3{-webkit-transform:translate(0px,90px);-moz-transform:translate(0px,90px);transform:translate(0px,90px)}
+.tile.tile-position-1-4{-webkit-transform:translate(0px,135px);-moz-transform:translate(0px,135px);transform:translate(0px,135px)}
+.tile.tile-position-1-5{-webkit-transform:translate(0px,180px);-moz-transform:translate(0px,180px);transform:translate(0px,180px)}
+.tile.tile-position-1-6{-webkit-transform:translate(0px,225px);-moz-transform:translate(0px,225px);transform:translate(0px,225px)}
+.tile.tile-position-2-1{-webkit-transform:translate(45px,0px);-moz-transform:translate(45px,0px);transform:translate(45px,0px)}
+.tile.tile-position-2-2{-webkit-transform:translate(45px,45px);-moz-transform:translate(45px,45px);transform:translate(45px,45px)}
+.tile.tile-position-2-3{-webkit-transform:translate(45px,90px);-moz-transform:translate(45px,90px);transform:translate(45px,90px)}
+.tile.tile-position-2-4{-webkit-transform:translate(45px,135px);-moz-transform:translate(45px,135px);transform:translate(45px,135px)}
+.tile.tile-position-2-5{-webkit-transform:translate(45px,180px);-moz-transform:translate(45px,180px);transform:translate(45px,180px)}
+.tile.tile-position-2-6{-webkit-transform:translate(45px,225px);-moz-transform:translate(45px,225px);transform:translate(45px,225px)}
+.tile.tile-position-3-1{-webkit-transform:translate(90px,0px);-moz-transform:translate(90px,0px);transform:translate(90px,0px)}
+.tile.tile-position-3-2{-webkit-transform:translate(90px,45px);-moz-transform:translate(90px,45px);transform:translate(90px,45px)}
+.tile.tile-position-3-3{-webkit-transform:translate(90px,90px);-moz-transform:translate(90px,90px);transform:translate(90px,90px)}
+.tile.tile-position-3-4{-webkit-transform:translate(90px,135px);-moz-transform:translate(90px,135px);transform:translate(90px,135px)}
+.tile.tile-position-3-5{-webkit-transform:translate(90px,180px);-moz-transform:translate(90px,180px);transform:translate(90px,180px)}
+.tile.tile-position-3-6{-webkit-transform:translate(90px,225px);-moz-transform:translate(90px,225px);transform:translate(90px,225px)}
+.tile.tile-position-4-1{-webkit-transform:translate(135px,0px);-moz-transform:translate(135px,0px);transform:translate(135px,0px)}
+.tile.tile-position-4-2{-webkit-transform:translate(135px,45px);-moz-transform:translate(135px,45px);transform:translate(135px,45px)}
+.tile.tile-position-4-3{-webkit-transform:translate(135px,90px);-moz-transform:translate(135px,90px);transform:translate(135px,90px)}
+.tile.tile-position-4-4{-webkit-transform:translate(135px,135px);-moz-transform:translate(135px,135px);transform:translate(135px,135px)}
+.tile.tile-position-4-5{-webkit-transform:translate(135px,180px);-moz-transform:translate(135px,180px);transform:translate(135px,180px)}
+.tile.tile-position-4-6{-webkit-transform:translate(135px,225px);-moz-transform:translate(135px,225px);transform:translate(135px,225px)}
+.tile.tile-position-5-1{-webkit-transform:translate(180px,0px);-moz-transform:translate(180px,0px);transform:translate(180px,0px)}
+.tile.tile-position-5-2{-webkit-transform:translate(180px,45px);-moz-transform:translate(180px,45px);transform:translate(180px,45px)}
+.tile.tile-position-5-3{-webkit-transform:translate(180px,90px);-moz-transform:translate(180px,90px);transform:translate(180px,90px)}
+.tile.tile-position-5-4{-webkit-transform:translate(180px,135px);-moz-transform:translate(180px,135px);transform:translate(180px,135px)}
+.tile.tile-position-5-5{-webkit-transform:translate(180px,180px);-moz-transform:translate(180px,180px);transform:translate(180px,180px)}
+.tile.tile-position-5-6{-webkit-transform:translate(180px,225px);-moz-transform:translate(180px,225px);transform:translate(180px,225px)}
+.tile.tile-position-6-1{-webkit-transform:translate(225px,0px);-moz-transform:translate(225px,0px);transform:translate(225px,0px)}
+.tile.tile-position-6-2{-webkit-transform:translate(225px,45px);-moz-transform:translate(225px,45px);transform:translate(225px,45px)}
+.tile.tile-position-6-3{-webkit-transform:translate(225px,90px);-moz-transform:translate(225px,90px);transform:translate(225px,90px)}
+.tile.tile-position-6-4{-webkit-transform:translate(225px,135px);-moz-transform:translate(225px,135px);transform:translate(225px,135px)}
+.tile.tile-position-6-5{-webkit-transform:translate(225px,180px);-moz-transform:translate(225px,180px);transform:translate(225px,180px)}
+.tile.tile-position-6-6{-webkit-transform:translate(225px,225px);-moz-transform:translate(225px,225px);transform:translate(225px,225px)}
+.game-container{margin-top:20px}
+.tile .tile-inner{font-size:24px}
+.game-message p{font-size:30px!important;height:30px!important;line-height:30px!important;margin-top:90px!important}
+.game-message .lower{margin-top:30px!important}
+}
+.block{display:flex;justify-content:center;align-items:center;margin:0 auto}
+.block-300{display:none;width:100%;height:250px;background-color:#8f7a66}
+.block-728{display:none;width:100%;max-width:728px;height:90px;background-color:#8f7a66}
+@media only screen and (max-width: 738px) {
+.block-300{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;margin-bottom:10px;border-radius:10px;margin-top:10px}
+.block-728{display:none}
+}
+@media only screen and (min-width: 739px) {
+.block-728{display:flex;justify-content:center;align-items:center;margin-bottom:10px;border-radius:10px;margin-top:10px}
+.block-300{display:none}
+}
+ul.unstyled.tips-and-tricks{list-style:none;padding:0;margin:30px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1200px}
+ul.unstyled.tips-and-tricks li{background:#e1e1e1;border-radius:10px;padding:16px;box-shadow:0 2px 6px #00000014;transition:transform .2s ease,box-shadow .2s ease;font-size:16px;line-height:1.5;color:#333}
+ul.unstyled.tips-and-tricks li:hover{transform:translateY(-4px);box-shadow:0 6px 12px #0000001f}
+@media (max-width: 600px) {
+ul.unstyled.tips-and-tricks{grid-template-columns:1fr}
+}
+@media (min-width: 601px) and (max-width: 992px) {
+ul.unstyled.tips-and-tricks{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+}
+@media (min-width: 993px) {
+ul.unstyled.tips-and-tricks{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+}
+</style>
+</head>
+<body>
+<script>
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/sw.js')
+.then(registration => {console.log('Service Worker registered successfully:', registration);})
+.catch(error => {console.log('Error in Service Worker registration:', error);});});}
+</script>
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">32768</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
+    </div>
+    <p class="game-intro">Join the numbers & get to the <strong>32768 tile!</strong></p>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+	        <a class="keep-playing-button">Keep going</a>
+          <a class="retry-button">Try again</a>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+	
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+		
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+    </p>
+        <hr>
+    <div class="block block-728"><script type="text/javascript">
+     atOptions = {
+       'key' : 'd1d26e15f7c349fd8e403bb5ea491a31',
+       'format' : 'iframe',
+       'height' : 90,
+       'width' : 728,
+       'params' : {}
+     };
+   </script>
+   <script type="text/javascript" src="//www.highperformanceformat.com/d1d26e15f7c349fd8e403bb5ea491a31/invoke.js"></script></div>
+       <hr>
+    
+<ul class="unstyled tips-and-tricks" style="text-align: center;">
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-online/">2048 Online</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/doge2048/">2048 Doge</a></li>
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-3x3/">2048 3x3</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-5x5/">2048 5x5</a></li>
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-6x6/">2048 6x6</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-flappy/">2048 Flappy</a></li>
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-ai/">2048 vs AI</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-one-piece/">2048 One Piece</a></li>
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-tetris/">2048 Tetris</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-minecraft/">2048 Minecraft</a></li>
+<li><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-mario/">2048 Mario</a></li>
+<li class="even"><a target="_blank" rel="noopener" href="https://kaloodinaz.github.io/2048-reverse/">2048 Reverse</a></li>
+</ul>
+<hr>
+    <hr>
+ <p><strong>2048 32768</strong> is an extended version of the classic <a href="https://kaloodinaz.github.io/game/2048/" target="_blank">2048 game</a>, featuring a 6x6 grid instead of the standard 4x4 board. This variation allows for a more strategic approach to merging tiles, making it a great option for players who enjoy longer gameplay sessions.</p>
+    <hr>
+   <p>
+      This 6 x 6 fast paced version by <a target="_blank" href="https://kaloodinaz.github.io/">Kaloo Dinaz</a> was cloned from
+      the "non-official" <a target="_blank" href="https://kaloodinaz.github.io/2048-online/">2048 game</a> authored by
+      <a target="_blank" href="https://github.com/kaloodinaz/">Kaloo Dinaz</a>.
+    </p>
+  </div>
+
+<script src="main.js?v=2.2"></script>
+<script src="https://cdn.counter.dev/script.js" data-id="74211804-62e3-41a8-9f09-2f1eac9640fb" data-utcoffset="2"></script>
+</body>
+</html>
